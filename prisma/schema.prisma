@@ -1,0 +1,80 @@
+// Prisma schema for personal portfolio + admin panel
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Profile {
+  id        String   @id @default("profile")
+  fullName  String
+  title     String
+  tagline   String
+  bio       String
+  location  String
+  email     String
+  resumeUrl String?
+  avatarUrl String?
+  updatedAt DateTime @updatedAt
+}
+
+model SocialLink {
+  id       String  @id @default(cuid())
+  platform String
+  url      String
+  order    Int     @default(0)
+}
+
+model Skill {
+  id       String @id @default(cuid())
+  name     String
+  category String
+  level    Int    @default(80)
+  order    Int    @default(0)
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  imageUrl    String?
+  githubUrl   String?
+  liveUrl     String?
+  tags        String
+  featured    Boolean  @default(false)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Experience {
+  id          String    @id @default(cuid())
+  company     String
+  role        String
+  description String
+  location    String?
+  startDate   DateTime
+  endDate     DateTime?
+  order       Int       @default(0)
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
