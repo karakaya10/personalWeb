@@ -24,7 +24,7 @@ function XGlyph(props: LucideProps) {
   );
 }
 
-const ICONS: Record<string, (props: LucideProps) => React.JSX.Element> = {
+const ICONS: Record<string, React.ComponentType<LucideProps>> = {
   github: GithubGlyph,
   linkedin: LinkedinGlyph,
   email: Mail,
